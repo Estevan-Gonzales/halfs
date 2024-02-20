@@ -44,7 +44,6 @@ function Canvas() {
             let leftBox = document.createElement('div');
             leftBox.className = 'left'; //need to remove these in future and replace with apporpriate css
             leftBox.style.backgroundColor = newColor;
-            leftBox.innerText = 'l';
             leftBox.onClick = addBox;
 
 
@@ -52,34 +51,32 @@ function Canvas() {
             rightBox.className = 'right';
             rightBox.style.backgroundColor = existingColor;
             rightBox.onClick = addBox;
-            rightBox.innerText = 'r'
 
             affectedBox.append(leftBox);
             affectedBox.append(rightBox);
 
-
-
+            console.log(leftBox);
+            console.log(rightBox);
             return
         }
 
         if (newPosition === 'right') {
             let leftBox = document.createElement('div');
-            leftBox.className = 'left';
+            leftBox.className = 'left'; //need to remove these in future and replace with apporpriate css
             leftBox.style.backgroundColor = existingColor;
-            leftBox.innerText = 'l';
             leftBox.onClick = addBox;
+
 
             let rightBox = document.createElement('div');
             rightBox.className = 'right';
             rightBox.style.backgroundColor = newColor;
-            rightBox.innerText = 'r';
             rightBox.onClick = addBox;
 
             affectedBox.append(leftBox);
             affectedBox.append(rightBox);
 
-
-
+            console.log(leftBox);
+            console.log(rightBox);
             return
         }
         
@@ -94,9 +91,6 @@ function Canvas() {
             bottomBox.className = 'bottom';
             bottomBox.style.backgroundColor = existingColor;
             bottomBox.onClick = addBox;
-
-            topBox.innerText = 't';
-            bottomBox.innerText = 'b'
 
             affectedBox.append(topBox);
             affectedBox.append(bottomBox);
@@ -148,7 +142,7 @@ function Canvas() {
     }
 
     return (
-        <div className="first" onClick={addBox}>
+        <div className="outside" onClick={addBox}>
 
         </div>
     )
