@@ -1,6 +1,6 @@
 function Box() {
     return (
-        <div className="second"></div>
+        <div className="second" onClick></div>
     )
 }
 

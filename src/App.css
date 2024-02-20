@@ -1,6 +1,6 @@
 .first {
   position: fixed;
-  display: flex;
+  display: grid;
   top: 0;
   left: 0;
   bottom: 0;
@@ -9,12 +9,42 @@
   background: red;
 }
 
-.second {
-  display: flex;
+
+
+.left {
+  display: grid;
   width: 50%;
   height: 100%;
-  position: relative;
 }
+
+.right {
+  display: grid;
+  width: 50%;
+  height: 100%;
+}
+
+.top {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template: auto auto / auto auto;
+  grid-column: span 2;
+  grid-row-start: 1;
+
+}
+
+.bottom {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template: auto auto / auto auto;
+
+  grid-row-start: 2;
+  grid-column: span 2;
+
+
+}
+
 
 .third {
   display: flex;
