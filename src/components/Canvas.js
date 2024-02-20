@@ -3,10 +3,10 @@ import React, {useState} from 'react'
 
 function Canvas() {
 
-    function returnRandomColor(argClass, existingColor) {
+    function returnRandomColor(existingColor) {
 
 
-        const allColors = ['blue', 'green', 'purple', 'pink', 'orange', 'black', 'red'];
+        const allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'brown', 'black', 'white'];
         const availableColors = [];
 
         for (let i = 0; i < allColors.length; i++) {
@@ -21,15 +21,17 @@ function Canvas() {
     }
 
 
-    function getRelativePosition(mouseX, mouseY, canvasWidth, canvasHeight) {
+    function getRelativePosition(mouseX, mouseY, canvasWidth, canvasHeight, targetXStart, targetXEnd, targetYStart, targetYEnd) {
+
+        console.log('mouseX', mouseX, 'containerWidth', canvasWidth);
 
         let orientation = (canvasWidth > canvasHeight ? 'landscape' : 'portrait');
         let clickRelative = ''
 
         if (orientation === 'landscape') {
-            clickRelative = (mouseX < (canvasWidth / 2) ? 'left' : 'right');
+            clickRelative = (mouseX < (targetXStart + ((targetXEnd - targetXStart) / 2)) ? 'left' : 'right');
         } else {
-            clickRelative = (mouseY < (canvasHeight / 2) ? 'top' : 'bottom');
+            clickRelative = (mouseY < (targetYStart + ((targetYEnd - targetYStart) / 2)) ? 'top' : 'bottom');
         }
         
         return clickRelative;
@@ -37,8 +39,8 @@ function Canvas() {
     }
 
     function renderBoxes(affectedBox, existingWidth, existingHeight, existingColor, newColor, newPosition) {
-        console.log(existingWidth, existingHeight, existingColor, newColor, newPosition);
 
+        console.log(newPosition);
 
         if (newPosition === 'left') {
             let leftBox = document.createElement('div');
@@ -55,8 +57,6 @@ function Canvas() {
             affectedBox.append(leftBox);
             affectedBox.append(rightBox);
 
-            console.log(leftBox);
-            console.log(rightBox);
             return
         }
 
@@ -75,8 +75,7 @@ function Canvas() {
             affectedBox.append(leftBox);
             affectedBox.append(rightBox);
 
-            console.log(leftBox);
-            console.log(rightBox);
+
             return
         }
         
@@ -95,9 +94,6 @@ function Canvas() {
             affectedBox.append(topBox);
             affectedBox.append(bottomBox);
 
-            console.log('BOXES');
-            console.log(topBox);
-            console.log(bottomBox);
 
             return
         }
@@ -121,21 +117,21 @@ function Canvas() {
     }
 
     function addBox(e) {
-        console.log('TARGET');
 
         let existingColor = ''
 
         if (!e.target.style.backgroundColor) {
-            existingColor = 'red';
+            existingColor = 'white';
         } else {
             existingColor = e.target.style.backgroundColor;
         }
 
-        let newColor = returnRandomColor(e.target.className, existingColor);
+        let newColor = returnRandomColor(existingColor);
 
         let boundingData = e.target.getBoundingClientRect();
+        console.log(boundingData);
 
-        let relativePosition = getRelativePosition(e.clientX, e.clientY, boundingData.width, boundingData.height);
+        let relativePosition = getRelativePosition(e.clientX, e.clientY, boundingData.width, boundingData.height, boundingData.left, boundingData.right, boundingData.top, boundingData.bottom);
 
         renderBoxes(e.target, boundingData.width, boundingData.height, existingColor, newColor, relativePosition)
 
