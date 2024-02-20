@@ -6,15 +6,14 @@
   bottom: 0;
   right: 0;
   overflow: auto;
-  background: red; /* Just to visualize the extent */
+  background: red;
 }
 
 .second {
   display: flex;
   width: 50%;
   height: 100%;
-  background: blue;
-  position: fixed;
+  position: relative;
 }
 
 .third {
